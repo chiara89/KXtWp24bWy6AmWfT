@@ -21,6 +21,18 @@ Build a machine learning system to detect if a spoken audio is synthetically gen
 For the voice cloning system (VC), you can utilize the TIMIT dataset as it consists of aligned text-audio data with various speakers. For the fake audio detection system (FAD) you can utilize the CommonVoice dataset as it consists of thousands of naturally spoken audio which could be used as golden spoken audio by humans as positive examples and creating negative examples using the voice cloning system as automatic data/label generator. Since the CommonVoice English dataset is large, you can use a subset of it by sampling the dataset.
 
 ## Methodology:
-
+The system is composed by two different sub-system: the voice cloning system and the fake audio detection system. 
+### Voice Cloning system:
+1) TIMIT dataset is used to extract audio features and text transcriptions.
+2) The pre-trained models Tacotron 2 and HiFi-GAN from Coqui TTS package are used for generating audio files.
+3) The audio files generated are transferred back to text using OpenAI Whisper.
+4) The Word Error Rate (WER) respect to the original text on the test set is computed.
+5) The mean and standard deviation of WER is evaluated.
+### Fake Audio Detection system:
+1) Use the Voice Cloning system to generate fake audio files from the CommonVoice dataset.
+2) Train and evaluate a binary CNN classifier using the original CommonVoice dataset and the fake audio samples created.
 
 ## Conclusions:
+The final trained model was able to achieve 99% precision, recall and F1 score on the test set. In detail only one fake sample is misclassified as real and 23 real samples are classified as fake. The performance are exceptional for this particular case but bigger and complex dataset could require a more complex model. Also the method to create fake audio files could be improved with the fine-tuning of the pretrained Tacotron2 model or different model could be considered.
+
+
