@@ -24,9 +24,9 @@ For the voice cloning system (VC), you can utilize the TIMIT dataset as it consi
 The system is composed by two different sub-system: the voice cloning system and the fake audio detection system. 
 ### Voice Cloning system:
 1) TIMIT dataset is used to extract audio features and text transcriptions.
-2) The pre-trained models Tacotron 2 and HiFi-GAN from Coqui TTS package are used for generating audio files.
+2) The pre-trained model xtts_v2 from Coqui TTS package are used for generating audio files cloning the speaker voice.
 3) The audio files generated are transferred back to text using OpenAI Whisper.
-4) The Word Error Rate (WER) respect to the original text on the test set is computed.
+4) The Word Error Rate (WER) respect to the original text on the test set is computed. WER is also calculated for each speaker.
 5) The mean and standard deviation of WER is evaluated.
 ### Fake Audio Detection system:
 1) Use the Voice Cloning system to generate fake audio files from the CommonVoice dataset.
